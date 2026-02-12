@@ -1,0 +1,257 @@
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.25s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.tab-container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+}
+
+.tab-button {
+  background: none;
+  color: var(--text-secondary);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.25s;
+}
+
+.tab-button:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.tab-button.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--accent-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-card .value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.chart-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.journal-entry {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.journal-entry .date {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.journal-entry .mood {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.journal-entry .notes {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.achievement-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+}
+
+.achievement-card.locked {
+  opacity: 0.5;
+}
+
+.achievement-card .icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-card .title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.achievement-card .description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.mood-selector {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.mood-button {
+  font-size: 2rem;
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mood-button:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-color);
+}
+
+.mood-button.selected {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.streak-display {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.streak-display .streak-number {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.streak-display .streak-label {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
