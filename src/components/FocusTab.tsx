@@ -34,7 +34,7 @@ export default function FocusTab() {
 
   useEffect(() => {
     // Timer countdown
-    let interval: number | undefined;
+    let interval: ReturnType<typeof setInterval> | undefined;
 
     if (focusState.is_active && !focusState.is_paused && focusState.remaining_seconds > 0) {
       interval = setInterval(() => {
