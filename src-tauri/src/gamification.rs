@@ -38,7 +38,7 @@ impl Default for UserStats {
 
 #[tauri::command]
 pub async fn update_streak(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<UserStats, String> {
     // Mock implementation - in production, calculate streak from database
     Ok(UserStats {
@@ -54,7 +54,7 @@ pub async fn update_streak(
 
 #[tauri::command]
 pub async fn get_achievements(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<Vec<Achievement>, String> {
     // Predefined achievements
     let achievements = vec![
@@ -113,7 +113,7 @@ pub async fn get_achievements(
 
 #[tauri::command]
 pub async fn get_user_stats(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<UserStats, String> {
     // Mock implementation
     Ok(UserStats {
@@ -129,7 +129,7 @@ pub async fn get_user_stats(
 
 #[tauri::command]
 pub async fn check_new_achievements(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<Vec<Achievement>, String> {
     // Check if any new achievements were unlocked
     // Returns list of newly unlocked achievements

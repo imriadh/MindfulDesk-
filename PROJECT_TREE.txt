@@ -1,0 +1,51 @@
+.
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── DEVELOPMENT.md
+├── LICENSE
+├── MS_STORE_GUIDE.md
+├── PRIVACY.md
+├── PROJECT_COMPLETE.md
+├── PROJECT_TREE.txt
+├── QUICKSTART.md
+├── README.md
+├── index.html
+├── package-lock.json
+├── package.json
+├── setup.bat
+├── setup.sh
+├── src
+│   ├── App.css
+│   ├── App.tsx
+│   ├── components
+│   │   ├── Dashboard.tsx
+│   │   ├── FocusTab.tsx
+│   │   ├── JournalTab.tsx
+│   │   ├── SettingsTab.tsx
+│   │   └── StatsTab.tsx
+│   ├── context
+│   │   └── ThemeContext.tsx
+│   ├── index.css
+│   └── main.tsx
+├── src-tauri
+│   ├── Cargo.toml
+│   ├── build.rs
+│   ├── icons
+│   │   ├── 128x128.png
+│   │   ├── 128x128@2x.png
+│   │   ├── 32x32.png
+│   │   ├── icon.icns
+│   │   └── icon.ico
+│   ├── src
+│   │   ├── database.rs
+│   │   ├── focus_manager.rs
+│   │   ├── gamification.rs
+│   │   ├── journal_manager.rs
+│   │   ├── main.rs
+│   │   └── stats_tracker.rs
+│   └── tauri.conf.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+7 directories, 42 files

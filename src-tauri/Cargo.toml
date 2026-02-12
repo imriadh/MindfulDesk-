@@ -9,18 +9,15 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[lib]
-name = "mindful_desk_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
 tauri-build = { version = "2.0", features = [] }
 
 [dependencies]
-tauri = { version = "2.2", features = ["tray-icon", "notification-all"] }
-tauri-plugin-notification = "2.0"
-tauri-plugin-shell = "2.0"
-tauri-plugin-sql = { version = "2.0", features = ["sqlite"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-notification = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 chrono = { version = "0.4", features = ["serde"] }

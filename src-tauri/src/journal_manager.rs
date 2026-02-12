@@ -22,7 +22,7 @@ pub async fn add_journal_entry(
     date: String,
     mood: i32,
     notes: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<JournalEntry, String> {
     if mood < 1 || mood > 5 {
         return Err("Mood must be between 1 and 5".to_string());
@@ -44,7 +44,7 @@ pub async fn add_journal_entry(
 pub async fn get_journal_entries(
     start_date: String,
     end_date: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<Vec<JournalEntry>, String> {
     // Mock implementation
     Ok(vec![
@@ -60,10 +60,10 @@ pub async fn get_journal_entries(
 
 #[tauri::command]
 pub async fn update_journal_entry(
-    id: i64,
+    _id: i64,
     mood: i32,
     notes: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<JournalEntry, String> {
     if mood < 1 || mood > 5 {
         return Err("Mood must be between 1 and 5".to_string());
@@ -71,7 +71,7 @@ pub async fn update_journal_entry(
 
     // Mock implementation
     Ok(JournalEntry {
-        id: Some(id),
+        id: Some(1),
         date: "2026-02-12".to_string(),
         mood,
         notes,
@@ -81,8 +81,8 @@ pub async fn update_journal_entry(
 
 #[tauri::command]
 pub async fn delete_journal_entry(
-    id: i64,
-    app: tauri::AppHandle,
+    _id: i64,
+    _app: tauri::AppHandle,
 ) -> Result<bool, String> {
     // Mock implementation
     Ok(true)
@@ -90,8 +90,8 @@ pub async fn delete_journal_entry(
 
 #[tauri::command]
 pub async fn get_mood_trends(
-    days: i32,
-    app: tauri::AppHandle,
+    _days: i32,
+    _app: tauri::AppHandle,
 ) -> Result<Vec<MoodTrend>, String> {
     // Mock implementation - in production, aggregate from database
     Ok(vec![

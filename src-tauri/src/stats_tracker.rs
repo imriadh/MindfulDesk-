@@ -33,9 +33,8 @@ pub async fn log_activity(
     activity_type: String,
     duration: i64,
     metadata: Option<String>,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<ActivityLog, String> {
-    let db = app.state::<tauri_plugin_sql::DbPool>();
     let timestamp = Utc::now().to_rfc3339();
 
     // In a real implementation, this would insert into the database
@@ -51,7 +50,7 @@ pub async fn log_activity(
 #[tauri::command]
 pub async fn get_daily_stats(
     date: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<DailyStats, String> {
     // Mock implementation - in production, query from database
     Ok(DailyStats {
@@ -66,7 +65,7 @@ pub async fn get_daily_stats(
 #[tauri::command]
 pub async fn get_weekly_stats(
     week_start: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<WeeklyStats, String> {
     // Mock implementation
     let daily_stats = vec![
@@ -93,7 +92,7 @@ pub async fn export_stats(
     start_date: String,
     end_date: String,
     format: String,
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
 ) -> Result<String, String> {
     // Mock CSV export
     let csv_data = "Date,Focus Minutes,Break Minutes,Sessions,Active Hours\n\

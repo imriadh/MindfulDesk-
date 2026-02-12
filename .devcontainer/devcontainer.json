@@ -1,0 +1,42 @@
+{
+  "name": "MindfulDesk Development",
+  "image": "mcr.microsoft.com/devcontainers/rust:1-bookworm",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/rust:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "tauri-apps.tauri-vscode",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "forwardPorts": [1420, 1421],
+  "portsAttributes": {
+    "1420": {
+      "label": "Frontend",
+      "onAutoForward": "notify"
+    },
+    "1421": {
+      "label": "HMR",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "npm install && sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.0-dev build-essential curl wget file libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev",
+
+  "remoteUser": "vscode"
+}
