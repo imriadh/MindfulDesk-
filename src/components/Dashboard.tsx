@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
-import FocusTab from "./FocusTab";
-import StatsTab from "./StatsTab";
-import JournalTab from "./JournalTab";
-import SettingsTab from "./SettingsTab";
+import FocusTab from "./FocusTab.tsx";
+import StatsTab from "./StatsTab.tsx";
+import JournalTab from "./JournalTab.tsx";
+import SettingsTab from "./SettingsTab.tsx";
 import { Sun, Moon } from "lucide-react";
 
 type TabType = "focus" | "stats" | "journal" | "settings";
