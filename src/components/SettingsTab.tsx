@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { Save, Award as AwardIcon, Settings as SettingsIcon } from "lucide-react";
+import { Save, Award as AwardIcon, Settings as SettingsIcon, Shield, Bell } from "lucide-react";
+import DistractionBlocker from "./DistractionBlocker";
+import HealthReminders from "./HealthReminders";
 
 interface FocusSettings {
   work_duration: number;
@@ -34,7 +36,7 @@ export default function SettingsTab() {
     sound_enabled: true,
   });
   const [achievements, setAchievements] = useState<Achievement[]>([]);
-  const [activeSection, setActiveSection] = useState<"settings" | "achievements">("settings");
+  const [activeSection, setActiveSection] = useState<"settings" | "achievements" | "blocker" | "reminders">("settings");
   const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
@@ -122,7 +124,7 @@ export default function SettingsTab() {
 
   return (
     <div className="container">
-      <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
+      <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
         <button
           onClick={() => setActiveSection("settings")}
           style={{
@@ -148,6 +150,32 @@ export default function SettingsTab() {
         >
           <AwardIcon size={20} />
           Achievements ({unlockedCount}/{achievements.length})
+        </button>
+        <button
+          onClick={() => setActiveSection("blocker")}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            backgroundColor: activeSection === "blocker" ? "var(--accent-color)" : "var(--bg-secondary)",
+            color: activeSection === "blocker" ? "white" : "var(--text-primary)",
+          }}
+        >
+          <Shield size={20} />
+          Distraction Blocker
+        </button>
+        <button
+          onClick={() => setActiveSection("reminders")}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            backgroundColor: activeSection === "reminders" ? "var(--accent-color)" : "var(--bg-secondary)",
+            color: activeSection === "reminders" ? "white" : "var(--text-primary)",
+          }}
+        >
+          <Bell size={20} />
+          Health Reminders
         </button>
       </div>
 
@@ -331,6 +359,10 @@ export default function SettingsTab() {
           </div>
         </div>
       )}
+
+      {activeSection === "blocker" && <DistractionBlocker />}
+
+      {activeSection === "reminders" && <HealthReminders />}
     </div>
   );
 }
