@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Shield, ShieldOff, Plus, X, AlertTriangle, Clock } from "lucide-react";
+import { StorageManager, STORAGE_KEYS } from "../utils/storage";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface BlockedItem {
   id: string;
@@ -25,11 +27,19 @@ export default function DistractionBlocker() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [overrideActive, setOverrideActive] = useState(false);
   const [overrideTimer, setOverrideTimer] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadSettings();
     loadPopularSites();
   }, []);
+
+  useEffect(() => {
+    // Persist settings to localStorage whenever they change
+    if (settings) {
+      StorageManager.save(STORAGE_KEYS.BLOCKER_SETTINGS, settings);
+    }
+  }, [settings]);
 
   useEffect(() => {
     if (overrideActive && overrideTimer > 0) {
@@ -43,11 +53,32 @@ export default function DistractionBlocker() {
   }, [overrideActive, overrideTimer]);
 
   const loadSettings = async () => {
+    setIsLoading(true);
     try {
+      // Try to load from backend
       const result = await invoke<BlockerSettings>("get_blocker_settings");
       setSettings(result);
     } catch (error) {
-      console.error("Failed to load blocker settings:", error);
+      console.error("Failed to load blocker settings from backend:", error);
+      // Fallback to localStorage
+      const cached = StorageManager.load<BlockerSettings | null>(
+        STORAGE_KEYS.BLOCKER_SETTINGS,
+        null
+      );
+      if (cached) {
+        setSettings(cached);
+      } else {
+        // Use default settings
+        setSettings({
+          enabled: false,
+          block_mode: "Warn",
+          blocked_items: [],
+          allow_override: true,
+          override_timeout: 300,
+        });
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -142,6 +173,21 @@ export default function DistractionBlocker() {
   };
 
   if (!settings) return <div>Loading...</div>;
+
+  if (isLoading) {
+    return <LoadingSpinner message="Loading blocker settings..." />;
+  }
+
+  if (!settings) {
+    return (
+      <div className="card">
+        <p style={{ color: 'var(--text-secondary)' }}>
+          Failed to load distraction blocker settings.
+        </p>
+        <button onClick={loadSettings}>Retry</button>
+      </div>
+    );
+  }
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

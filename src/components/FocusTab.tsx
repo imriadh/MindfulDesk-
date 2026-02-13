@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { sendNotification } from "@tauri-apps/plugin-notification";
+import { checkNotificationPermission } from "../utils/notifications";
 import { Play, Pause, Square, Coffee, Brain } from "lucide-react";
 
 interface FocusState {
@@ -60,17 +61,22 @@ export default function FocusTab() {
     
     // Show notification
     try {
-      if (sessionType === "Focus") {
-        await sendNotification({
-          title: "Focus Session Complete! 🎉",
-          body: "Time for a well-deserved break!",
-        });
-        setQuote(motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]);
+      const hasPermission = await checkNotificationPermission();
+      if (hasPermission) {
+        if (sessionType === "Focus") {
+          await sendNotification({
+            title: "Focus Session Complete! 🎉",
+            body: "Time for a well-deserved break!",
+          });
+          setQuote(motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]);
+        } else {
+          await sendNotification({
+            title: "Break Complete! ⚡",
+            body: "Ready to focus again?",
+          });
+        }
       } else {
-        await sendNotification({
-          title: "Break Complete! ⚡",
-          body: "Ready to focus again?",
-        });
+        console.warn("Notification permission not granted");
       }
     } catch (error) {
       console.error("Failed to send notification:", error);

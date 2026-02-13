@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { sendNotification } from "@tauri-apps/plugin-notification";
 import { Bell, BellOff, Plus, X, Edit2, Check } from "lucide-react";
+import { StorageManager, STORAGE_KEYS } from "../utils/storage";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface HealthReminder {
   id: string;
@@ -25,10 +27,18 @@ export default function HealthReminders() {
   const [editInterval, setEditInterval] = useState(0);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newReminder, setNewReminder] = useState({ interval: 30, message: "" });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadSettings();
   }, []);
+
+  useEffect(() => {
+    // Persist settings to localStorage whenever they change
+    if (settings) {
+      StorageManager.save(STORAGE_KEYS.REMINDER_SETTINGS, settings);
+    }
+  }, [settings]);
 
   useEffect(() => {
     if (!settings || !settings.enabled) return;
@@ -57,11 +67,22 @@ export default function HealthReminders() {
   }, [settings]);
 
   const loadSettings = async () => {
+    setIsLoading(true);
     try {
       const result = await invoke<ReminderSettings>("get_reminder_settings");
       setSettings(result);
     } catch (error) {
-      console.error("Failed to load reminder settings:", error);
+      console.error("Failed to load reminder settings from backend:", error);
+      // Fallback to localStorage
+      const cached = StorageManager.load<ReminderSettings | null>(
+        STORAGE_KEYS.REMINDER_SETTINGS,
+        null
+      );
+      if (cached) {
+        setSettings(cached);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -147,7 +168,20 @@ export default function HealthReminders() {
     }
   };
 
-  if (!settings) return <div>Loading...</div>;
+  if (isLoading) {
+    return <LoadingSpinner message="Loading health reminders..." />;
+  }
+
+  if (!settings) {
+    return (
+      <div className="card">
+        <p style={{ color: 'var(--text-secondary)' }}>
+          Failed to load health reminder settings.
+        </p>
+        <button onClick={loadSettings}>Retry</button>
+      </div>
+    );
+  }
 
   return (
     <div style={{ maxWidth: "800px" }}>
