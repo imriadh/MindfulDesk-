@@ -257,6 +257,17 @@ export default function StatsTab() {
             {userStats?.points || 0} points
           </div>
         </div>
+
+        <div className="stat-card">
+          <h3>⚡ Active Time Today</h3>
+          <div className="value">{Math.floor((activityState?.total_active_seconds || 0) / 3600)}h</div>
+          <div style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
+            {Math.floor(((activityState?.total_active_seconds || 0) % 3600) / 60)}m active
+          </div>
+          <div style={{ color: "var(--text-secondary)", fontSize: "0.75rem", marginTop: "0.25rem" }}>
+            ({Math.floor((activityState?.total_idle_seconds || 0) / 60)}m idle)
+          </div>
+        </div>
       </div>
 
       {/* Charts */}
