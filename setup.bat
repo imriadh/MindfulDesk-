@@ -1,4 +1,10 @@
-@echo off
+cd /workspaces/MindfulDesk- && chmod +x build.sh && git add -A && git commit -m "docs: add Windows installation guide and build scripts
+
+- Add comprehensive WINDOWS_INSTALL.md with step-by-step instructions
+- Add build-windows.bat automated build script
+- Add build.sh for Linux/macOS
+- Update README with prominent installation section
+- Include troubleshooting and system requirements" && git push origin main@echo off
 REM MindfulDesk Setup Script for Windows
 REM This script checks prerequisites and sets up the development environment
 

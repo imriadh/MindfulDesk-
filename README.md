@@ -11,6 +11,35 @@ A cross-platform desktop application for mindful productivity and wellness. Buil
 
 > **📚 Quick Links:** [Quickstart](QUICKSTART.md) | [Development Guide](DEVELOPMENT.md) | [Architecture](ARCHITECTURE.md) | [Contributing](CONTRIBUTING.md) | [Privacy Policy](PRIVACY.md)
 
+---
+
+## 📥 Installation
+
+### 🪟 **Windows Users - Quick Install**
+
+**→ See [WINDOWS_INSTALL.md](WINDOWS_INSTALL.md) for detailed Windows installation guide**
+
+**Option 1: Download Pre-Built Installer** (Easiest)
+1. Go to [GitHub Actions](https://github.com/imriadh/MindfulDesk-/actions)
+2. Download the latest "windows-artifacts"
+3. Run the `.msi` or `.exe` installer
+
+**Option 2: Build from Source**
+1. Install [Node.js](https://nodejs.org/) and [Rust](https://www.rust-lang.org/tools/install)
+2. Clone this repo: `git clone https://github.com/imriadh/MindfulDesk-.git`
+3. Run `build-windows.bat` script
+4. Install from `src-tauri\target\release\bundle\`
+
+### 🍎 **macOS Users**
+- Download from [GitHub Releases](https://github.com/imriadh/MindfulDesk-/releases)
+- Or build from source (see below)
+
+### 🐧 **Linux Users**
+- Download `.deb` or `.AppImage` from [GitHub Releases](https://github.com/imriadh/MindfulDesk-/releases)
+- Or build from source (see below)
+
+---
+
 ## ✨ Features
 
 ### 🎯 Focus & Break Reminders
