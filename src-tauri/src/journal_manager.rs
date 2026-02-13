@@ -42,8 +42,8 @@ pub async fn add_journal_entry(
 
 #[tauri::command]
 pub async fn get_journal_entries(
-    start_date: String,
-    end_date: String,
+    _start_date: String,
+    _end_date: String,
     _app: tauri::AppHandle,
 ) -> Result<Vec<JournalEntry>, String> {
     // Mock implementation

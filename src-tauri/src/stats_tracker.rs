@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use chrono::{DateTime, Utc, NaiveDate};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ActivityLog {
@@ -89,9 +88,9 @@ pub async fn get_weekly_stats(
 
 #[tauri::command]
 pub async fn export_stats(
-    start_date: String,
-    end_date: String,
-    format: String,
+    _start_date: String,
+    _end_date: String,
+    _format: String,
     _app: tauri::AppHandle,
 ) -> Result<String, String> {
     // Mock CSV export

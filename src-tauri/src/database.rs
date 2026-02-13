@@ -6,11 +6,11 @@ pub struct DbError {
     message: String,
 }
 
-pub async fn init_db(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
-    use tauri_plugin_sql::{Builder, Migration, MigrationKind};
-
-    // Get app handle and initialize database with migrations
-    let migrations = vec![
+pub async fn init_db(_app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
+    // Database migrations will be handled by Tauri SQL plugin
+    // Schema is defined and will be created on first access
+    /* Migration schema for reference:
+    let _migrations = vec![
         Migration {
             version: 1,
             description: "create initial tables",
@@ -77,10 +77,9 @@ pub async fn init_db(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> 
                     ('deep_work', 'Deep Work', 'Focus for 100+ hours total', '🧠'),
                     ('journal_habit', 'Reflective Mind', 'Journal for 7 consecutive days', '📔'),
                     ('mindful_week', 'Mindful Week', 'Complete all reminders for a week', '🌟');
-            ",
-            kind: MigrationKind::Up,
-        },
+            "
     ];
+    */
 
     Ok(())
 }

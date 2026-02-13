@@ -145,7 +145,7 @@ pub async fn check_url_blocked(
 
 #[tauri::command]
 pub async fn request_override(
-    duration: u32,
+    _duration: u32,
     state: State<'_, BlockerManager>,
 ) -> Result<bool, String> {
     let settings = state.settings.lock().unwrap();

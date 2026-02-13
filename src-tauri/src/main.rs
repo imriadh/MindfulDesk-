@@ -10,8 +10,6 @@ mod distraction_blocker;
 mod health_reminders;
 mod idle_detector;
 
-use tauri::Manager;
-
 #[tauri::command]
 async fn init_database(app: tauri::AppHandle) -> Result<(), String> {
     database::init_db(&app).await.map_err(|e| e.to_string())
