@@ -53,13 +53,34 @@ interface UserStats {
   points: number;
 }
 
+interface ActivityState {
+  is_active: boolean;
+  total_active_seconds: number;
+  total_idle_seconds: number;
+}
+
 export default function StatsTab() {
   const [weeklyStats, setWeeklyStats] = useState<WeeklyStats | null>(null);
   const [userStats, setUserStats] = useState<UserStats | null>(null);
+  const [activityState, setActivityState] = useState<ActivityState | null>(null);
 
   useEffect(() => {
     loadStats();
+    loadActivityState();
+    
+    // Update activity state every 30 seconds
+    const interval = setInterval(loadActivityState, 30000);
+    return () => clearInterval(interval);
   }, []);
+
+  const loadActivityState = async () => {
+    try {
+      const state = await invoke<ActivityState>("get_activity_state");
+      setActivityState(state);
+    } catch (error) {
+      console.error("Failed to load activity state:", error);
+    }
+  };
 
   const loadStats = async () => {
     try {

@@ -4,3 +4,5 @@ export { default as FocusTab } from './FocusTab';
 export { default as StatsTab } from './StatsTab';
 export { default as JournalTab } from './JournalTab';
 export { default as SettingsTab } from './SettingsTab';
+export { default as DistractionBlocker } from './DistractionBlocker';
+export { default as HealthReminders } from './HealthReminders';
