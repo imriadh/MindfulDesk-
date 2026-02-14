@@ -60,7 +60,7 @@ jobs:
 
       - name: Upload artifacts (Ubuntu)
         if: matrix.platform == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nightly-linux-${{ steps.sha.outputs.short_sha }}
           path: |
@@ -70,7 +70,7 @@ jobs:
 
       - name: Upload artifacts (macOS)
         if: matrix.platform == 'macos-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nightly-macos-${{ steps.sha.outputs.short_sha }}
           path: |
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload artifacts (Windows)
         if: matrix.platform == 'windows-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nightly-windows-${{ steps.sha.outputs.short_sha }}
           path: |

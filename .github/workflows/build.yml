@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload artifacts (Ubuntu)
         if: matrix.platform == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: linux-artifacts
           path: |
@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload artifacts (macOS)
         if: matrix.platform == 'macos-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: macos-artifacts
           path: |
@@ -98,7 +98,7 @@ jobs:
 
       - name: Upload artifacts (Windows)
         if: matrix.platform == 'windows-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: windows-artifacts
           path: |
