@@ -50,7 +50,7 @@ jobs:
         run: npm install
 
       - name: Build application
-        run: npm run tauri build
+        run: npm run tauri:build
 
       - name: Debug build output
         run: ls -R src-tauri/target/release/bundle
